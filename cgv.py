@@ -13,6 +13,7 @@ from telepot.loop import MessageLoop
 from telepot.delegate import per_chat_id, create_open, pave_event_space
 
 TICKET_FORMAT = re.compile(r"popupSchedule\('(.*)','(.*)','(\d\d:\d\d)','(\d*)','(\d*)', '(\d*)', '(\d*)', '(\d*)',")
+CONFIG_FILE = 'setting.json'
 DB_FILE = os.path.join(os.path.dirname(__file__), 'TICKET.db')
 
 def getTimelist(playYMD):
