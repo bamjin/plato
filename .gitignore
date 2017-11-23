@@ -95,6 +95,7 @@ ENV/
 
 # database
 *.db
+*.db-journal
 
 # Setting
 setting.json

@@ -8,6 +8,7 @@ import datetime
 import sqlite3
 import time, datetime
 import telepot
+import json
 from bs4 import BeautifulSoup
 from telepot.loop import MessageLoop
 from telepot.delegate import per_chat_id, create_open, pave_event_space
@@ -19,7 +20,7 @@ DB_FILE = os.path.join(os.path.dirname(__file__), 'TICKET.db')
 def getTimelist(playYMD):
 	data = {'theaterCd':"0013", 'playYMD':playYMD}
 	response = requests.post('http://m.cgv.co.kr/Schedule/cont/ajaxMovieSchedule.aspx', data)
-	soup = BeautifulSoup(response.text, "html5lib")
+	soup = BeautifulSoup(response.text, "lxml")
 	
 	return soup.find_all("ul", "timelist")
 
@@ -71,7 +72,6 @@ def noti(msg):
 				result = ("용산 IMAX 예매가능\n'%s', %s %s" %(imaxTicket["movieTitle"], date, imaxTicket["ticketTime"]))
 				bot.sendMessage(chat_id, result)
 			else:
-				bot.sendMessage(chat_id, "no result")
 				time.sleep(60)
 
 def parseConfig(filename):
