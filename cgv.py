@@ -68,7 +68,7 @@ def noti(msg):
 			if savedTicket is None:
 				cursor.execute('INSERT INTO ticket VALUES (?,?,?,?,?,0)', (imaxTicket['theaterCd'], imaxTicket['movieIdx'], imaxTicket['ticketDate'], imaxTicket['ticketTime'], imaxTicket['ticketTime']))
 				date = datetime.datetime.strptime(imaxTicket["ticketDate"], '%Y%m%d').date()
-				result = ("예매가능: \n%s %s, %s" %(date, imaxTicket["ticketTime"], imaxTicket["movieTitle"]))
+				result = ("용산 IMAX 예매가능\n'%s', %s %s" %(imaxTicket["movieTitle"], date, imaxTicket["ticketTime"]))
 				bot.sendMessage(chat_id, result)
 			else:
 				bot.sendMessage(chat_id, "no result")
@@ -95,7 +95,6 @@ if __name__ == '__main__':
 
 	getConfig(config)
 	bot = telepot.Bot(TOKEN)
-
 	conn.commit()
 	MessageLoop(bot, noti).run_forever()
 	conn.close()
